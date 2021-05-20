@@ -24,7 +24,7 @@ class Unet():
     def __init__(self):
         pass
     
-    def Build_UNetwork(self):
+    def Build_UNetwork(self, input_shape = (572, 572, 1)):
         
         """
         Builds the Unet Model network.
@@ -37,7 +37,7 @@ class Unet():
         
         """
 
-        inputs = Input((572, 572, 1))
+        inputs = Input(input_shape)
         
         # the contracting path.
         conv1, pool1 = UnetUtils.contracting_block(input_layer = inputs, filters = 64)
@@ -75,7 +75,7 @@ class Unet():
         model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["acc"])
         model.summary()
         
-    def plotModel(self, model, to_file='unet.png', show_shapes=True):
+    def plotModel(self, model, to_file='unet.png', show_shapes=True, dpi=96):
         
         """
         Saves the Unet model to a file.
@@ -84,10 +84,11 @@ class Unet():
             model: the Unet model. 
             to_file: the file name to save the model. Default name - 'unet.png'.
             show_shapes: whether to display shape information. Default = True.
+            dpi: dots per inch. Default value is 96.
             
         Return:
             None
         
         """
         
-        tf.keras.utils.plot_model(model, to_file = to_file, show_shapes = show_shapes)
+        tf.keras.utils.plot_model(model, to_file = to_file, show_shapes = show_shapes, dpi = dpi)
