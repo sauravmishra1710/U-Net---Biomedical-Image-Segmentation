@@ -21,7 +21,7 @@ class UnetUtils():
     def __init__(self):
         pass
     
-    def contracting_block(self, input_layer, filters, kernel_size = 3, padding = "valid"):
+    def contracting_block(self, input_layer, filters, padding, kernel_size = 3):
         
         """ 
         UNet Contracting block
@@ -56,7 +56,7 @@ class UnetUtils():
 
         return conv, pool
 
-    def bottleneck_block(self, input_layer, filters, kernel_size = 3, padding = "valid", strides = 1):
+    def bottleneck_block(self, input_layer, filters, padding, kernel_size = 3, strides = 1):
         
         """ 
         UNet bottleneck block
@@ -90,7 +90,7 @@ class UnetUtils():
 
         return conv
 
-    def expansive_block(self, input_layer, skip_conn_layer, filters, kernel_size = 3, padding = "valid", strides = 1):
+    def expansive_block(self, input_layer, skip_conn_layer, filters, padding, kernel_size = 3, strides = 1):
         
         """ 
         UNet expansive (upsample) block.
@@ -123,12 +123,15 @@ class UnetUtils():
                                     strides = 2, 
                                     padding = padding)(input_layer)
         
-        # crop the spurce feature map so that the skip connection can be established.
-        # Cropping is necessary due to the loss of border pixels in every convolution.
-        cropped = self.crop_tensor(skip_conn_layer, transConv)
-        
+        # crop the source feature map so that the skip connection can be established.
+        # the original paper implemented unpadded convolutions. So cropping is necessary 
+        # due to the loss of border pixels in every convolution.
         # establish the skip connections.
-        concat = Concatenate()([transConv, cropped])
+        if padding == "valid":
+            cropped = self.crop_tensor(skip_conn_layer, transConv)
+            concat = Concatenate()([transConv, cropped])
+        else:
+            concat = Concatenate()([transConv, skip_conn_layer])
         
         # two 3x3 convolutions, each followed by a ReLU
         up_conv = Conv2D(filters = filters, 
