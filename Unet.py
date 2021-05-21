@@ -21,7 +21,7 @@ class Unet():
         https://arxiv.org/pdf/1505.04597
     """
     
-    def __init__(self, input_shape, filters, padding):
+    def __init__(self, input_shape = (572, 572, 1), filters = [64, 128, 256, 512, 1024], padding = "valid"):
         """
         
         Initialize the Unet framework and the model parameters - input_shape, 
