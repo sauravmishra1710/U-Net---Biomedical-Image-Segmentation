@@ -81,22 +81,24 @@ class Unet():
         
         return model
 
-    def CompileAndSummarizeModel(self, model):
+    def CompileAndSummarizeModel(self, model, optimizer = "adam", loss = "binary_crossentropy"):
         
         """
         Compiles and displays the model summary of the Unet model.
         
         Args:
             model: The Unet model.
-        
+            optimizer: model optimizer. Default is the adam optimizer.
+            loss: the loss function. Default is the binary cross entropy loss.
+            
         Return:
             None
         
         """
-        model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["acc"])
+        model.compile(optimizer = optimizer, loss = loss, metrics = ["acc"])
         model.summary()
         
-    def plotModel(self, model, to_file='unet.png', show_shapes=True, dpi=96):
+    def plotModel(self, model, to_file = 'unet.png', show_shapes = True, dpi = 96):
         
         """
         Saves the Unet model to a file.
