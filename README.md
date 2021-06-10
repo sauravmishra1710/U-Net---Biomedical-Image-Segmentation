@@ -78,3 +78,14 @@ Comparing the microscopic image, original mask and the predicted mask, it looks 
 
 Though UNet was originally designed for bio-medical images, this model can be applied to any conputer vision segmentation task.
 
+## Further Reading
+1. UNet++: A Nested U-Net Architecture for Medical Image Segmentation. The original paper is available at https://arxiv.org/abs/1807.10165.
+2. UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation. The original paper is available at https://arxiv.org/abs/1912.05074v2.
+3. Attention U-Net: Learning Where to Look for the Pancreas. The original paper is available at https://arxiv.org/abs/1804.03999.
+4. TernausNet: U-Net with VGG11 Encoder Pre-Trained on ImageNet for Image Segmentation. The original paper is available at https://arxiv.org/abs/1801.05746.
+5. U-Net and its variants for medical image segmentation: theory and applications. The original paper is available at https://arxiv.org/abs/2011.01118.
+
+
+## References
+1. Ronneberger, O., Fischer, P. and Brox, T. (2015) ‘U-Net: Convolutional Networks for Biomedical Image Segmentation’, CoRR, abs/1505.0. Available at: http://arxiv.org/abs/1505.04597. 
+2. Implementing original U-Net from scratch using PyTorch by Abhishek Thakur. Available at https://www.youtube.com/watch?v=u1loyDCoGbE
